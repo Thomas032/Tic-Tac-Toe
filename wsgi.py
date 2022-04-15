@@ -1,4 +1,5 @@
 from app import app
 import eventlet.wsgi
+import os
 
-eventlet.wsgi.server(eventlet.listen(('127.0.0.1', 5000)), app)
+eventlet.wsgi.server(eventlet.listen((os.environ.get('PORT', '5000'), 5000)), app)
