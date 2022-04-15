@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap');
+*
+{
+    padding: 0px;
+    margin:0px;
+    font-family: 'Roboto Mono', monospace;
+}
+.main
+{
+    height:100vh;
+    background-color: green;
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(64deg, #43bb9c, #35aadc, #b529d8);
+    background-size: 600% 600%;
+    -webkit-animation: animation 30s ease infinite;
+    animation: animation 30s ease infinite;
+}
+.content {
+    height: 100vh;
+    display:flex;
+    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
+}
+.header{
+    margin-top: 30%;
+}
+.comment {
+    margin-top: 5%;
+    text-align: center;
+}
+.shadow{
+    background-color: rgba(0, 0, 0, 0.642);
+    color:white;
+    text-shadow: 20px 20px 20px black;
+}
+.btn-container{
+    display:flex;
+    flex-direction: column;
+    margin-top: 5%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.btns{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 5%;
+}
+
+@-webkit-keyframes animation {
+    0%{background-position:0% 56%}
+    50%{background-position:100% 45%}
+    100%{background-position:0% 56%}
+}
+@keyframes animation{
+    0%{background-position:0% 56%}
+    50%{background-position:100% 45%}
+    100%{background-position:0% 56%}
+}

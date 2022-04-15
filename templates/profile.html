@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block titile %}
+    Your profile
+{% endblock %}
+{% block main %}
+    <div class="main">
+        <div class="card prof">
+            <div class="information">
+                <div class="info-box">
+                    <div class="info-box-item">
+                        <h5>Username : {{user["username"]}}</h5>
+                        <button class="btn btn-info ml-2" onClick="show(1)"><i class="fa-solid fa-pen"></i></button>
+                    </div>
+                    <div class="info-box-item  mt-3 hidden">
+                        <form method="post" action="/profile" class="form-inline">
+                              <div class="form-group mx-sm-3 mb-2">
+                                <input type="text" class="form-control" name="username" placeholder="Enter new username">
+                              </div>
+                              <button type="submit" class="btn btn-primary">Change</button>
+                        </form>
+                    </div>
+                </div>
+                <br>
+                <div class="info-box mt-3">
+                    <div class="info-box-item">
+                        <h5>Password :  {{ "*" * 10}}</h5>
+                        <button class="btn btn-info ml-2" onClick="show(3)"><i class="fa-solid fa-pen"></i></button>
+                    </div>
+                    <div class="info-box-item  mt-3 hidden">
+                        <form method="post" action="/profile" class="form-inline">
+                              <div class="form-group mx-sm-3 mb-2">
+                                <input type="password" class="form-control" name="password" placeholder="Enter new password">
+                                <input type="password" class="form-control ml-2" name="confirmation" placeholder="Confirm new password">
+                              </div>
+                              <button type="submit" class="btn btn-primary mb-2">Change</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function show(index){
+            var hidden = document.querySelectorAll(".info-box-item");
+            hidden[index].classList.remove("hidden");
+        }
+    </script>
+{% endblock %}

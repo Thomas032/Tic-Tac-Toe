@@ -1,0 +1,112 @@
+{% extends "layout.html"%}
+{% block title %}
+    Game
+{% endblock %}
+
+{% block main %}
+    <div class="game-container">
+        <div class="versus"><h1>{{ user["username"]}}[{{user_char}}] VS {{ oponent["username"]}}[{{oponent_char}}] </h1></div>
+        <input type="hidden"  class="my_char" value="{{ user_char }}">
+        <input type="hidden"  class="join_code" value="{{ code }}">
+        <input type="hidden"  class="id" value="{{ user['id'] }}">
+        <input type="hidden"  class="oponent_id" value="{{ oponent['id'] }}">
+        <div class="game">
+            <div class="gameplay">
+                {% for i in range(9) %}
+                    <div class="box">
+                        <h3 class="box-val">_</h3>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="result" style="display:none">
+                <div class="jumbotron">
+                    <h1 class="display-4 status"></h1>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var socket = io()
+        var btns = document.querySelectorAll(".box")
+        var player = document.querySelector(".my_char").value;
+        var join_code = document.querySelector(".join_code").value;
+        var id = document.querySelector(".id").value;
+        var oponent_id = document.querySelector(".oponent_id").value;
+        setInterval(function() {
+            socket.emit("get_field", {join_code:join_code});
+            socket.emit("check_winner", {join_code:join_code})
+            socket.emit("check_loser", {join_code:join_code})
+        }, 200);
+        btns.forEach(function(btn){
+            btn.addEventListener("click", function(){
+                var id = Array.from(btn.parentElement.children).indexOf(btn);
+                var text = btn.firstElementChild;
+                var response = socket.emit("user_played", {code:join_code, character:player});
+                socket.on("user_played_response", function(data){
+                    if(text.innerHTML == "_" && data["data"] == 1){
+                        // check if field is ocuupied
+                        text.innerHTML = player;
+                        console.log(id)
+                        socket.emit("make_move", {join_code:join_code, index:id, character:player});
+                        btn.style.pointerEvents = "none";
+                    } 
+                });
+            });
+        });
+        socket.on("rewrite_field", function(data){
+                var button_array = document.querySelectorAll(".box")
+                var data_str = String(data["field"]);
+                console.log(data_str)
+                var data_array = data_str.split(",");
+                var i = 0
+                button_array.forEach(function(btn){
+                    btn.children[0].innerHTML = data_array[i];
+                    i++;
+                })
+        });
+        socket.on("user_won", function(data){
+            var username = data["username"];
+            var winner_id = data["winner_id"];
+            var char = data["character"];
+            if(id == winner_id){
+                var text = "You Won!";
+                var bg = "green";
+            }
+            else{
+                var text = "You Lost!";
+                var bg = "red";
+            }
+            var game_field = document.querySelector(".gameplay");
+            var result = document.querySelector(".result");
+            var status = document.querySelector(".status");
+            game_field.style.display = "none";
+            result.style.display = "block";
+            status.innerHTML = text;
+            status.style.background = bg;
+        });
+        socket.on("user_lost", function(data){
+            
+            var text = "You Lost!";
+            var bg = "red";
+            var game_field = document.querySelector(".gameplay");
+            var result = document.querySelector(".result");
+            var status = document.querySelector(".status");
+            game_field.style.display = "none";
+            result.style.display = "block";
+            status.innerHTML = "You Lost!";
+            status.style.background = "red";
+            
+        });
+        socket.on("end_game",async function(data){
+            for(let i=0; i<2; i++){
+                await sleep(i*1000);
+            }
+            socket.emit("cleanup", {join_code:join_code})
+            window.location.href = "/dashboard";
+        })
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+    </script>
+
+{% endblock %}

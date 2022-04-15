@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %}
+    Waiting on other user
+{% endblock %}
+{% block main %}
+    <div class="alert alert-primary" role="alert">
+        Yur join code -> {{join_code}}
+    </div>
+    <h1>Waiting on other player to connect ...</h1>
+    <input type="hidden"  class="join_code" value="{{ join_code }}">
+    <script>
+        var socket = io();
+        var ajax = new XMLHttpRequest();
+        var join_code = document.querySelector(".join_code").value;
+        var myinterval = setInterval(function() 
+        {
+            socket.emit("get_status", {code:join_code});
+            socket.on("Data_recieved", function(data){
+                console.log(data["data"]);
+                if( data["data"] == 1)
+                {
+                    clearInterval(myinterval);
+                    window.location.href = "/game/" + join_code;
+                }
+            });
+        }, 2000);
+    </script>
+{% endblock %}

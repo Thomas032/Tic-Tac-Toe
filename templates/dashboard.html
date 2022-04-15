@@ -1,0 +1,50 @@
+{% extends "layout.html"%}
+{% block title %}
+    Dashboard
+{% endblock %}
+{% block main %}
+   <div class="main">
+       <div class="welcome">
+           <h2 style="text-align:center;text-decoration: underline;" >Welcome, {{user["username"]}}</h2>
+           <h3 style="text-align:center;">This is Tic-Tac-Toe, web app used from playing tic tac toe online with your friends.</h3>
+           <h4>How to play?</h4>
+           <p>If any of your friends already started a game you will have to ask for join code and paste it into a textbox with text "Enter a Joincode". In order to actually join the room you have to click on the "Join a Game" button and you are there, Enjoy!</p>
+           <h4>How to start a game?</h4>
+           <p>To start/create a new game you have to click on "Create new game" button and you will be redirected to your game room, where you can find a joincode and the game field it self.</p>
+           <h4>How do i report a bug?</h4>
+            <p>In case you are redirected to some internal server error page or you just find some bug (error in aplication eg. you can not log out) feel free to <a href="mailto:tomas.bartos.cv@gmail.com?subject=Aplication Error">email me!</a></p>
+       </div>
+       <div class="content">
+           <div class="card stretch">
+               <h3 class="header">Join a Game:</h3>
+                    <form action="/join-game" method="post"> 
+                        <div class="form-group mx-sm-3 mb-2">
+                            <input type="text" class="form-control" id="join_code" placeholder="Enter a join code" maxlength="6" name="join_code" autocomplete="off">
+                        </div>
+                        <button class="btn btn-primary " id="test">Join a Game</button>
+                    </form>
+
+           </div>
+           <div class="card stretch">
+            <h3 class="header">Create a Game:</h3>
+            <form action="/create-game" method="post"> 
+                 <button class="btn btn-info" type="submit">Create a Game</button>
+             </form>
+        </div>
+       </div>
+   </div>
+   <script>
+       var btn = document.querySelector("#test")
+       var socket = io()
+       btn.addEventListener("click", function a (e){
+            var code = document.querySelector("#join_code").value
+            socket.emit("join", {code:code})
+       });
+       socket.on("redirect", function b(destination) {
+            window.location.href = destination;
+        });
+        socket.on("join_game", function(code){
+            socket.join(code);
+        });
+   </script>
+{% endblock %}

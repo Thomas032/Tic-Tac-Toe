@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap');
+*{
+    font-family: 'Roboto Mono', monospace;
+}
+.hidden{
+    visibility: hidden;
+}
+.main{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    flex-direction: column;
+}
+.card{
+    padding: 2%;
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+}
+.information, .info-box{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:center;
+}
+.info-box-item{
+    display:flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content:center;
+}
+.content{
+    display:flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 2%;
+}
+.card:first-child{
+    background-color:#9adcffac;
+}
+.card:last-child{
+    background-color:#ff8aadcc;
+}
+.welcome{
+    padding: 2%;
+    text-align: left;
+}
+.stretch{
+    flex-basis: 50%;
+}
+.stretch:last-child{
+    margin-left: 2%;
+}
+.prof{
+    background: white !important;
+}
+
+.game-container{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+}
+.versus{
+    text-align:center; 
+}
+.game{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content: center;
+    padding: 5%;
+}
+.gameplay{
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    height: fit-content;
+    align-items: center;
+    justify-content: center;
+}
+.box{
+    width: 10em;
+    height: 10em;
+    margin: 1em;
+    color:black;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 3px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.47);
+    font-size: xx-small;
+    
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    .content{
+        flex-direction: column !important;
+
+    }
+    .stretch:last-child{
+        margin-top: 2%;
+    }
+}

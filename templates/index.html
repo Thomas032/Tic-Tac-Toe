@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="icon" href="static/icon.png">
+    <title>Tic Tac Toe</title>
+</head>
+<body>
+
+    <div class="main">
+        <div class="content">
+            <div class="header">
+                <h1>Tic-Tac-Toe</h1>
+            </div>
+            <div class="comment">
+                <p><span class="shadow">The place where all of your gamer dreams come true.<br>This website serves as a online tic tac toe game, where you can play tac tac toe with your friends.</span></p>
+            </div>
+            <div class="btn-container">
+                <p><span class="shadow">If you want to play you have to LOGIN or REGISTER:</span></p>
+                <div class="mx-auto">
+                    <button class="btn btn-primary" type="button" id="login">Login</button>
+                    <button class="btn btn-success" type="button" id="register">Register</button>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+    <script>
+        var login = document.querySelector("#login");
+        login.addEventListener("click", function(){
+            window.location.href = "/login";
+        })
+        var login = document.querySelector("#register");
+        login.addEventListener("click", function(){
+            window.location.href = "/register";
+        })
+
+    </script>
+
+</body>
+</html>
