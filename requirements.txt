@@ -5,5 +5,4 @@ gunicorn
 psycopg2
 requests
 flask_socketio
-string
 werkzeug.security
