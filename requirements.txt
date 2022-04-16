@@ -1,9 +1,9 @@
 cs50
 Flask
 Flask-Session
-gunicorn
+gunicorn==20.1.0 
+eventlet==0.30.2
 psycopg2
 requests
 Flask-SocketIO
-eventlet==0.33.0 
 gevent-websocket
