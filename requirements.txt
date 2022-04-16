@@ -5,5 +5,5 @@ gunicorn
 psycopg2
 requests
 Flask-SocketIO
-eventlet
+eventlet==0.33.0 
 gevent-websocket
