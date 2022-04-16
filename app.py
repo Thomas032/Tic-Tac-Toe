@@ -20,7 +20,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # wrap the socket io around the app
-socketio = SocketIO(app)
+socketio = SocketIO(app,  async_mode="eventlet", manage_session=False)
 
 WIN = [ [0, 1, 2],
         [3, 4, 5],
