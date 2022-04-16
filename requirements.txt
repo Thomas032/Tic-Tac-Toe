@@ -4,5 +4,6 @@ Flask-Session
 gunicorn
 psycopg2
 requests
-flask_socketio
+Flask-SocketIO
 eventlet
+gevent-websocket
