@@ -22,16 +22,6 @@ Session(app)
 # wrap the socket io around the app
 socketio = SocketIO(app, async_mode="eventlet", manage_session=False)
 
-WIN = [ [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6]
-    ]
-
 
 @app.route("/")
 def index():
